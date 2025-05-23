@@ -10,10 +10,10 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
     @Column(name = "name") //аннотация column если отличается название колонки
-    val name: String,
-    val email: String,
+    var name: String,
+    var email: String,
     val birth: LocalDate,
-    val age: Int
+    var age: Int?
 
 ) {
     override fun toString(): String {
