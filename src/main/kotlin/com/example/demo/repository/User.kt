@@ -2,6 +2,7 @@ package com.example.demo.repository
 
 import jakarta.persistence.*
 import java.time.LocalDate
+import java.time.Period
 
 @Entity
 @Table(name = "users")
@@ -13,10 +14,16 @@ class User(
     var name: String,
     var email: String,
     val birth: LocalDate,
-    var age: Int?
-
 ) {
+    @get:Transient
+    val age: Int
+        get() = Period.between(birth, LocalDate.now()).years
+
     override fun toString(): String {
-        return "User(id=$id, name='$name', email='$email', birth=$birth, age=$age)"
+        return "User(id=$id," +
+                " name='$name'," +
+                " email='$email'," +
+                " birth=$birth, " +
+                "age=$age)"
     }
 }

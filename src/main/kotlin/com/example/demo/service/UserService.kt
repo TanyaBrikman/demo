@@ -13,14 +13,14 @@ class UserService(
     private val userRepository: UserRepository,
 ) {
 
-    fun findAll(): List<User> = userRepository.findAll()
+    fun findAll(): List<User> {
+        return userRepository.findAll()
+    }
 
     fun create(user: User): User {
-        val optionalUser = userRepository.findByEmail(user.email)
+        val existingUser = userRepository.findByEmail(user.email)
 
-        if (optionalUser != null) throw IllegalArgumentException("User ${user.email} already exists")
-
-        user.age = Period.between(user.birth, LocalDate.now()).years
+        if (existingUser != null) throw IllegalArgumentException("User ${user.email} already exists")
 
         return userRepository.save(user)
     }
@@ -43,8 +43,8 @@ class UserService(
             user.email = email
         }
 
-        if(name != user.name){
-                user.name = name
+        if (name != user.name) {
+            user.name = name
         }
 
 //        userRepository.save(user)

@@ -12,7 +12,6 @@ class UserController(
 ) {
 
     @GetMapping("/api/users")
-
     fun findAll(): List<User> {
         return userService.findAll()
     }
@@ -27,18 +26,16 @@ class UserController(
 
 
     @DeleteMapping("/api/users/{id}")
-
     fun delete(@PathVariable id: Long) {
         userService.delete(id)
     }
 
     @PutMapping("/api/users/{id}")
-
     fun update(
         @PathVariable id: Long,
         @RequestParam(required = false) email: String,
         @RequestParam(required = false) name: String
-    ){
+    ) {
         userService.update(id, email, name)
     }
 }
